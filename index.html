@@ -19,339 +19,381 @@
     }
 
     .card {
-      background: #ffffff;
+      background: #fff;
       border-radius: 16px;
       border: 0.5px solid #e0ddd6;
       padding: 2rem;
       width: 100%;
-      max-width: 620px;
+      max-width: 660px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
 
-    h1 {
-      font-size: 20px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 4px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 1.75rem;
-    }
+    h1 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 1.75rem; }
 
     .model-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-family: monospace;
-      background: #f1efe8;
-      border: 0.5px solid #d3d1c7;
-      border-radius: 6px;
-      padding: 2px 7px;
-      color: #666;
-      margin-left: 6px;
-      vertical-align: middle;
+      font-size: 11px; font-family: monospace;
+      background: #f1efe8; border: 0.5px solid #d3d1c7;
+      border-radius: 6px; padding: 2px 7px; color: #666;
+      margin-left: 6px; vertical-align: middle;
     }
 
-    .input-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 0.75rem;
-    }
+    .input-row { display: flex; gap: 8px; margin-bottom: 0.75rem; }
 
-    input[type="text"] {
-      flex: 1;
-      font-size: 15px;
-      padding: 9px 12px;
-      border: 0.5px solid #ccc;
-      border-radius: 8px;
-      outline: none;
-      background: #fff;
-      color: #1a1a1a;
+    input[type="text"], input[type="number"] {
+      font-size: 15px; padding: 9px 12px;
+      border: 0.5px solid #ccc; border-radius: 8px;
+      outline: none; background: #fff; color: #1a1a1a;
       transition: border-color 0.15s;
     }
-
-    input[type="text"]:focus { border-color: #888; }
+    input[type="text"] { flex: 1; }
+    input[type="number"] { width: 70px; text-align: center; }
+    input:focus { border-color: #888; }
 
     button {
-      font-size: 14px;
-      padding: 9px 18px;
-      border-radius: 8px;
-      border: 0.5px solid #ccc;
-      background: #fff;
-      color: #1a1a1a;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
+      font-size: 14px; padding: 9px 18px; border-radius: 8px;
+      border: 0.5px solid #ccc; background: #fff; color: #1a1a1a;
+      cursor: pointer; white-space: nowrap; transition: background 0.15s;
     }
-
     button:hover { background: #f5f5f3; }
     button:active { transform: scale(0.98); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-    .examples {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 1.75rem;
-      align-items: center;
+    .btn-primary {
+      background: #1a1a1a; color: #fff; border-color: #1a1a1a;
     }
+    .btn-primary:hover { background: #333; }
+    .btn-primary:disabled { background: #999; border-color: #999; }
 
+    .examples { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.75rem; align-items: center; }
     .examples-label { font-size: 12px; color: #888; }
-
     .chip {
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 0.5px solid #d0cec7;
-      color: #666;
-      background: #f5f5f3;
-      cursor: pointer;
-      transition: background 0.15s;
+      font-size: 12px; padding: 4px 10px; border-radius: 999px;
+      border: 0.5px solid #d0cec7; color: #666; background: #f5f5f3; cursor: pointer;
     }
-
     .chip:hover { background: #eae9e3; }
 
     .loading {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      padding: 1rem 0;
-      color: #888;
-      font-size: 14px;
+      display: none; align-items: center; gap: 10px;
+      padding: 1rem 0; color: #888; font-size: 14px;
     }
-
     .loading.visible { display: flex; }
-
     .spinner {
-      width: 16px;
-      height: 16px;
-      border: 2px solid #ddd;
-      border-top-color: #555;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      flex-shrink: 0;
+      width: 16px; height: 16px;
+      border: 2px solid #ddd; border-top-color: #555;
+      border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    #resultContent { display: none; }
+    .section-divider {
+      border: none; border-top: 0.5px solid #e8e6e0; margin: 1.5rem 0;
+    }
 
-    .task-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
+    .section-label {
+      font-size: 11px; font-weight: 600; color: #999;
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
     }
 
     .task-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 1.25rem;
-      padding-bottom: 1rem;
+      font-size: 18px; font-weight: 600; color: #1a1a1a;
+      margin-bottom: 1.25rem; padding-bottom: 1rem;
       border-bottom: 0.5px solid #e8e6e0;
     }
 
     .steps-list { list-style: none; }
-
-    .step-item {
-      display: flex;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 0.5px solid #eee;
-    }
-
+    .step-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 0.5px solid #eee; }
     .step-item:last-child { border-bottom: none; }
-
     .step-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #f5f5f3;
-      border: 0.5px solid #d3d1c7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 600;
-      color: #888;
-      flex-shrink: 0;
-      margin-top: 2px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #f5f5f3; border: 0.5px solid #d3d1c7;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: #888;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+    .step-desc { font-size: 13px; color: #666; line-height: 1.55; }
+
+    .schedule-controls {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 0.5px solid #e8e6e0; flex-wrap: wrap;
+    }
+    .schedule-controls label { font-size: 14px; color: #555; }
+
+    .schedule-grid { margin-top: 1.25rem; }
+
+    .day-group { margin-bottom: 1.25rem; }
+    .day-header {
+      font-size: 12px; font-weight: 600; color: #888;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 8px;
     }
 
-    .step-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-bottom: 3px;
+    .schedule-item {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 10px 14px; border-radius: 10px;
+      border: 0.5px solid #e8e6e0; background: #fff;
+      margin-bottom: 6px;
     }
 
-    .step-desc {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.55;
+    .time-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 8px;
+      border-radius: 999px; white-space: nowrap; flex-shrink: 0; margin-top: 1px;
     }
+    .time-Morning  { background: #faeeda; color: #633806; }
+    .time-Afternoon { background: #e1f5ee; color: #085041; }
+    .time-Evening  { background: #eeedfe; color: #3c3489; }
+
+    .sched-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+    .sched-meta { font-size: 12px; color: #888; }
+    .sched-note { font-size: 12px; color: #666; margin-top: 3px; font-style: italic; }
 
     .error-box {
-      display: none;
-      font-size: 14px;
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin-top: 10px;
+      display: none; font-size: 14px; border-radius: 8px; padding: 10px 14px; margin-top: 10px;
     }
-
-    .error-box.danger {
-      background: #fff0f0;
-      color: #b91c1c;
-      border: 0.5px solid #fca5a5;
-    }
-
-    .error-box.warning {
-      background: #fffbeb;
-      color: #92400e;
-      border: 0.5px solid #fcd34d;
-    }
+    .error-box.danger { background: #fff0f0; color: #b91c1c; border: 0.5px solid #fca5a5; }
+    .error-box.warning { background: #fffbeb; color: #92400e; border: 0.5px solid #fcd34d; }
 
     .reset-btn {
-      margin-top: 1.5rem;
-      font-size: 13px;
-      color: #888;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
+      margin-top: 1.5rem; font-size: 13px; color: #888;
+      background: none; border: none; padding: 0; cursor: pointer;
     }
-
     .reset-btn:hover { color: #333; background: none; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>AI Task Breakdown Tool <span class="model-badge">gpt-4o-mini</span></h1>
-    <p class="subtitle">Enter any big task and AI will break it down into clear, actionable steps.</p>
+<div class="card">
+  <h1>AI Task Breakdown Tool <span class="model-badge">gpt-4o-mini</span></h1>
+  <p class="subtitle">Enter any big task and AI will break it into steps — then generate a schedule for you.</p>
 
-    <div class="input-row">
-      <input type="text" id="taskInput" placeholder="e.g. Build a web app" />
-      <button id="breakdownBtn" onclick="runBreakdown()">Break it down ↗</button>
-    </div>
-
-    <div class="examples">
-      <span class="examples-label">Try:</span>
-      <span class="chip" onclick="setExample(this)">Build a web app</span>
-      <span class="chip" onclick="setExample(this)">Launch a podcast</span>
-      <span class="chip" onclick="setExample(this)">Write a research paper</span>
-      <span class="chip" onclick="setExample(this)">Start a small business</span>
-      <span class="chip" onclick="setExample(this)">Learn a new language</span>
-    </div>
-
-    <div class="loading" id="loadingEl">
-      <div class="spinner"></div>
-      <span>Breaking down your task...</span>
-    </div>
-
-    <div id="resultContent">
-      <div class="task-label">Your task</div>
-      <div class="task-title" id="taskTitle"></div>
-      <ol class="steps-list" id="stepsList"></ol>
-      <div class="error-box" id="errorMsg"></div>
-      <button class="reset-btn" onclick="resetTool()">← Try another task</button>
-    </div>
+  <div class="input-row">
+    <input type="text" id="taskInput" placeholder="e.g. Build a web app" />
+    <button class="btn-primary" id="breakdownBtn" onclick="runBreakdown()">Break it down ↗</button>
   </div>
 
-  <script>
-    function setExample(el) {
-      document.getElementById('taskInput').value = el.textContent.trim();
-      document.getElementById('taskInput').focus();
-    }
+  <div class="examples">
+    <span class="examples-label">Try:</span>
+    <span class="chip" onclick="setExample(this)">Build a web app</span>
+    <span class="chip" onclick="setExample(this)">Launch a podcast</span>
+    <span class="chip" onclick="setExample(this)">Write a research paper</span>
+    <span class="chip" onclick="setExample(this)">Start a small business</span>
+    <span class="chip" onclick="setExample(this)">Learn a new language</span>
+  </div>
 
-    async function runBreakdown() {
-      const task = document.getElementById('taskInput').value.trim();
-      if (!task) { document.getElementById('taskInput').focus(); return; }
+  <div class="loading" id="loadingBreakdown">
+    <div class="spinner"></div>
+    <span>Breaking down your task...</span>
+  </div>
 
-      const loadingEl = document.getElementById('loadingEl');
-      const resultContent = document.getElementById('resultContent');
-      const errorMsg = document.getElementById('errorMsg');
-      const breakdownBtn = document.getElementById('breakdownBtn');
-      const taskInput = document.getElementById('taskInput');
+  <div id="resultContent" style="display:none;">
+    <div class="section-label">Your task</div>
+    <div class="task-title" id="taskTitle"></div>
+    <ol class="steps-list" id="stepsList"></ol>
 
-      loadingEl.classList.add('visible');
-      resultContent.style.display = 'none';
-      errorMsg.style.display = 'none';
-      breakdownBtn.disabled = true;
-      taskInput.disabled = true;
+    <div class="schedule-controls">
+      <label for="daysInput">Generate a schedule across</label>
+      <input type="number" id="daysInput" value="7" min="1" max="30" />
+      <label for="daysInput">days</label>
+      <button id="scheduleBtn" onclick="runSchedule()">Generate schedule ↗</button>
+    </div>
 
-      try {
-        // Calls local Flask proxy — no CORS issue
-        const res = await fetch("/breakdown", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ task })
-        });
+    <div class="loading" id="loadingSchedule" style="margin-top:1rem;">
+      <div class="spinner"></div>
+      <span>Building your schedule...</span>
+    </div>
 
-        const data = await res.json();
-        const content = data.content || "";
+    <div id="scheduleResult" style="display:none; margin-top: 1.25rem;">
+      <hr class="section-divider" />
+      <div class="section-label" style="margin-bottom:1rem;">Your schedule</div>
+      <div class="schedule-grid" id="scheduleGrid"></div>
+    </div>
 
-        if (content.includes("exceeded your allocation")) {
-          showError("You've exceeded your daily API allocation. Come back tomorrow or contact your professor!", "warning");
-          return;
-        }
+    <div class="error-box" id="errorMsg"></div>
+    <button class="reset-btn" onclick="resetTool()">← Try another task</button>
+  </div>
+</div>
 
-        const clean = content.replace(/```json|```/g, "").trim();
-        const parsed = JSON.parse(clean);
+<script>
+  let currentSteps = [];
+  let currentTask = "";
 
-        document.getElementById('taskTitle').textContent = task;
-        const list = document.getElementById('stepsList');
-        list.innerHTML = '';
-        parsed.steps.forEach((step, i) => {
-          const li = document.createElement('li');
-          li.className = 'step-item';
-          li.innerHTML = `
-            <div class="step-num">${i + 1}</div>
-            <div>
-              <p class="step-title">${step.title}</p>
-              <p class="step-desc">${step.description}</p>
-            </div>`;
-          list.appendChild(li);
-        });
+  function setExample(el) {
+    document.getElementById('taskInput').value = el.textContent.trim();
+    document.getElementById('taskInput').focus();
+  }
 
+  async function runBreakdown() {
+    const task = document.getElementById('taskInput').value.trim();
+    if (!task) { document.getElementById('taskInput').focus(); return; }
+
+    currentTask = task;
+    currentSteps = [];
+
+    const loadingEl = document.getElementById('loadingBreakdown');
+    const resultContent = document.getElementById('resultContent');
+    const errorMsg = document.getElementById('errorMsg');
+    const breakdownBtn = document.getElementById('breakdownBtn');
+    const taskInput = document.getElementById('taskInput');
+
+    loadingEl.classList.add('visible');
+    resultContent.style.display = 'none';
+    document.getElementById('scheduleResult').style.display = 'none';
+    errorMsg.style.display = 'none';
+    breakdownBtn.disabled = true;
+    taskInput.disabled = true;
+
+    try {
+      const res = await fetch("/breakdown", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task })
+      });
+
+      const data = await res.json();
+      const content = data.content || "";
+
+      if (content.includes("exceeded your allocation")) {
         loadingEl.classList.remove('visible');
+        showError("You've exceeded your daily API allocation. Come back tomorrow or contact your professor!", "warning");
         resultContent.style.display = 'block';
-
-      } catch (err) {
-        showError("Something went wrong. Make sure app.py is running and try again.", "danger");
-        console.error(err);
-      } finally {
-        breakdownBtn.disabled = false;
-        taskInput.disabled = false;
-        loadingEl.classList.remove('visible');
+        return;
       }
-    }
 
-    function showError(msg, type) {
-      const resultContent = document.getElementById('resultContent');
-      const errorMsg = document.getElementById('errorMsg');
-      document.getElementById('stepsList').innerHTML = '';
-      document.getElementById('taskTitle').textContent = '';
+      const parsed = JSON.parse(content.replace(/```json|```/g, "").trim());
+      currentSteps = parsed.steps;
+
+      document.getElementById('taskTitle').textContent = task;
+      const list = document.getElementById('stepsList');
+      list.innerHTML = '';
+      currentSteps.forEach((step, i) => {
+        const li = document.createElement('li');
+        li.className = 'step-item';
+        li.innerHTML = `
+          <div class="step-num">${i + 1}</div>
+          <div>
+            <p class="step-title">${step.title}</p>
+            <p class="step-desc">${step.description}</p>
+          </div>`;
+        list.appendChild(li);
+      });
+
+      loadingEl.classList.remove('visible');
       resultContent.style.display = 'block';
-      errorMsg.style.display = 'block';
-      errorMsg.className = `error-box ${type}`;
-      errorMsg.textContent = msg;
-    }
 
-    function resetTool() {
-      document.getElementById('resultContent').style.display = 'none';
-      document.getElementById('loadingEl').classList.remove('visible');
-      document.getElementById('taskInput').value = '';
-      document.getElementById('taskInput').focus();
+    } catch (err) {
+      loadingEl.classList.remove('visible');
+      resultContent.style.display = 'block';
+      showError("Something went wrong. Make sure app.py is running and try again.", "danger");
+      console.error(err);
+    } finally {
+      breakdownBtn.disabled = false;
+      taskInput.disabled = false;
     }
+  }
 
-    document.getElementById('taskInput').addEventListener('keydown', e => {
-      if (e.key === 'Enter') runBreakdown();
+  async function runSchedule() {
+    if (!currentSteps.length) return;
+
+    const totalDays = parseInt(document.getElementById('daysInput').value) || 7;
+    const loadingEl = document.getElementById('loadingSchedule');
+    const scheduleResult = document.getElementById('scheduleResult');
+    const scheduleBtn = document.getElementById('scheduleBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    loadingEl.classList.add('visible');
+    scheduleResult.style.display = 'none';
+    errorMsg.style.display = 'none';
+    scheduleBtn.disabled = true;
+
+    try {
+      const res = await fetch("/schedule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task: currentTask, steps: currentSteps, total_days: totalDays })
+      });
+
+      const data = await res.json();
+      const content = data.content || "";
+
+      if (content.includes("exceeded your allocation")) {
+        showError("You've exceeded your daily API allocation. Come back tomorrow or contact your professor!", "warning");
+        return;
+      }
+
+      const parsed = JSON.parse(content.replace(/```json|```/g, "").trim());
+      renderSchedule(parsed.schedule);
+
+      loadingEl.classList.remove('visible');
+      scheduleResult.style.display = 'block';
+
+    } catch (err) {
+      loadingEl.classList.remove('visible');
+      showError("Couldn't generate schedule. Please try again.", "danger");
+      console.error(err);
+    } finally {
+      scheduleBtn.disabled = false;
+    }
+  }
+
+  function renderSchedule(schedule) {
+    const grid = document.getElementById('scheduleGrid');
+    grid.innerHTML = '';
+
+    const byDay = {};
+    schedule.forEach(item => {
+      if (!byDay[item.day]) byDay[item.day] = [];
+      byDay[item.day].push(item);
     });
-  </script>
+
+    Object.keys(byDay).sort((a, b) => a - b).forEach(day => {
+      const group = document.createElement('div');
+      group.className = 'day-group';
+
+      const header = document.createElement('div');
+      header.className = 'day-header';
+      header.textContent = `Day ${day}`;
+      group.appendChild(header);
+
+      byDay[day].forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'schedule-item';
+        const hrs = parseFloat(item.duration_hours);
+        const durText = hrs === 1 ? '1 hour' : `${hrs % 1 === 0 ? hrs.toFixed(0) : hrs} hours`;
+        el.innerHTML = `
+          <span class="time-badge time-${item.time_of_day}">${item.time_of_day}</span>
+          <div style="flex:1;">
+            <p class="sched-title">${item.title}</p>
+            <p class="sched-meta">${durText}</p>
+            ${item.note ? `<p class="sched-note">${item.note}</p>` : ''}
+          </div>`;
+        group.appendChild(el);
+      });
+
+      grid.appendChild(group);
+    });
+  }
+
+  function showError(msg, type) {
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.style.display = 'block';
+    errorMsg.className = `error-box ${type}`;
+    errorMsg.textContent = msg;
+  }
+
+  function resetTool() {
+    document.getElementById('resultContent').style.display = 'none';
+    document.getElementById('scheduleResult').style.display = 'none';
+    document.getElementById('loadingBreakdown').classList.remove('visible');
+    document.getElementById('loadingSchedule').classList.remove('visible');
+    document.getElementById('taskInput').value = '';
+    document.getElementById('taskInput').focus();
+    currentSteps = [];
+    currentTask = "";
+  }
+
+  document.getElementById('taskInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') runBreakdown();
+  });
+</script>
 </body>
 </html>
