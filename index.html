@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Task Breakdown Tool</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f3;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 0.5px solid #e0ddd6;
+      padding: 2rem;
+      width: 100%;
+      max-width: 620px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 1.75rem;
+    }
+
+    .model-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-family: monospace;
+      background: #f1efe8;
+      border: 0.5px solid #d3d1c7;
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: #666;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 0.75rem;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      font-size: 15px;
+      padding: 9px 12px;
+      border: 0.5px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      background: #fff;
+      color: #1a1a1a;
+      transition: border-color 0.15s;
+    }
+
+    input[type="text"]:focus { border-color: #888; }
+
+    button {
+      font-size: 14px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 0.5px solid #ccc;
+      background: #fff;
+      color: #1a1a1a;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    button:hover { background: #f5f5f3; }
+    button:active { transform: scale(0.98); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.75rem;
+      align-items: center;
+    }
+
+    .examples-label { font-size: 12px; color: #888; }
+
+    .chip {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 0.5px solid #d0cec7;
+      color: #666;
+      background: #f5f5f3;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .chip:hover { background: #eae9e3; }
+
+    .loading {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 1rem 0;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .loading.visible { display: flex; }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ddd;
+      border-top-color: #555;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #resultContent { display: none; }
+
+    .task-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .task-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 0.5px solid #e8e6e0;
+    }
+
+    .steps-list { list-style: none; }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 0.5px solid #eee;
+    }
+
+    .step-item:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f5f5f3;
+      border: 0.5px solid #d3d1c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 3px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .error-box {
+      display: none;
+      font-size: 14px;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 10px;
+    }
+
+    .error-box.danger {
+      background: #fff0f0;
+      color: #b91c1c;
+      border: 0.5px solid #fca5a5;
+    }
+
+    .error-box.warning {
+      background: #fffbeb;
+      color: #92400e;
+      border: 0.5px solid #fcd34d;
+    }
+
+    .reset-btn {
+      margin-top: 1.5rem;
+      font-size: 13px;
+      color: #888;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .reset-btn:hover { color: #333; background: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>AI Task Breakdown Tool <span class="model-badge">gpt-4o-mini</span></h1>
+    <p class="subtitle">Enter any big task and AI will break it down into clear, actionable steps.</p>
+
+    <div class="input-row">
+      <input type="text" id="taskInput" placeholder="e.g. Build a web app" />
+      <button id="breakdownBtn" onclick="runBreakdown()">Break it down ↗</button>
+    </div>
+
+    <div class="examples">
+      <span class="examples-label">Try:</span>
+      <span class="chip" onclick="setExample(this)">Build a web app</span>
+      <span class="chip" onclick="setExample(this)">Launch a podcast</span>
+      <span class="chip" onclick="setExample(this)">Write a research paper</span>
+      <span class="chip" onclick="setExample(this)">Start a small business</span>
+      <span class="chip" onclick="setExample(this)">Learn a new language</span>
+    </div>
+
+    <div class="loading" id="loadingEl">
+      <div class="spinner"></div>
+      <span>Breaking down your task...</span>
+    </div>
+
+    <div id="resultContent">
+      <div class="task-label">Your task</div>
+      <div class="task-title" id="taskTitle"></div>
+      <ol class="steps-list" id="stepsList"></ol>
+      <div class="error-box" id="errorMsg"></div>
+      <button class="reset-btn" onclick="resetTool()">← Try another task</button>
+    </div>
+  </div>
+
+  <script>
+    function setExample(el) {
+      document.getElementById('taskInput').value = el.textContent.trim();
+      document.getElementById('taskInput').focus();
+    }
+
+    async function runBreakdown() {
+      const task = document.getElementById('taskInput').value.trim();
+      if (!task) { document.getElementById('taskInput').focus(); return; }
+
+      const loadingEl = document.getElementById('loadingEl');
+      const resultContent = document.getElementById('resultContent');
+      const errorMsg = document.getElementById('errorMsg');
+      const breakdownBtn = document.getElementById('breakdownBtn');
+      const taskInput = document.getElementById('taskInput');
+
+      loadingEl.classList.add('visible');
+      resultContent.style.display = 'none';
+      errorMsg.style.display = 'none';
+      breakdownBtn.disabled = true;
+      taskInput.disabled = true;
+
+      try {
+        // Calls local Flask proxy — no CORS issue
+        const res = await fetch("/breakdown", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ task })
+        });
+
+        const data = await res.json();
+        const content = data.content || "";
+
+        if (content.includes("exceeded your allocation")) {
+          showError("You've exceeded your daily API allocation. Come back tomorrow or contact your professor!", "warning");
+          return;
+        }
+
+        const clean = content.replace(/```json|```/g, "").trim();
+        const parsed = JSON.parse(clean);
+
+        document.getElementById('taskTitle').textContent = task;
+        const list = document.getElementById('stepsList');
+        list.innerHTML = '';
+        parsed.steps.forEach((step, i) => {
+          const li = document.createElement('li');
+          li.className = 'step-item';
+          li.innerHTML = `
+            <div class="step-num">${i + 1}</div>
+            <div>
+              <p class="step-title">${step.title}</p>
+              <p class="step-desc">${step.description}</p>
+            </div>`;
+          list.appendChild(li);
+        });
+
+        loadingEl.classList.remove('visible');
+        resultContent.style.display = 'block';
+
+      } catch (err) {
+        showError("Something went wrong. Make sure app.py is running and try again.", "danger");
+        console.error(err);
+      } finally {
+        breakdownBtn.disabled = false;
+        taskInput.disabled = false;
+        loadingEl.classList.remove('visible');
+      }
+    }
+
+    function showError(msg, type) {
+      const resultContent = document.getElementById('resultContent');
+      const errorMsg = document.getElementById('errorMsg');
+      document.getElementById('stepsList').innerHTML = '';
+      document.getElementById('taskTitle').textContent = '';
+      resultContent.style.display = 'block';
+      errorMsg.style.display = 'block';
+      errorMsg.className = `error-box ${type}`;
+      errorMsg.textContent = msg;
+    }
+
+    function resetTool() {
+      document.getElementById('resultContent').style.display = 'none';
+      document.getElementById('loadingEl').classList.remove('visible');
+      document.getElementById('taskInput').value = '';
+      document.getElementById('taskInput').focus();
+    }
+
+    document.getElementById('taskInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') runBreakdown();
+    });
+  </script>
+</body>
+</html>
